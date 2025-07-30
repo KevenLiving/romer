@@ -10,8 +10,8 @@ def create_app():
     app = Flask(__name__)
     
     # Confuguração
-    app.config['SECRET_KEY'] = 'sua-chave-secreta-aqui'  # Mude isso para produção
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo_app.db'  # Banco SQLite
+    app.config['SECRET_KEY'] = 'sua-chave-secreta-aqui'  
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo_app.db'  
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     
 
@@ -21,7 +21,7 @@ def create_app():
     # Configurando Flask-Login
     login_manager = LoginManager()
     login_manager.init_app(app)
-    login_manager.login_view = 'auth.login'  # Página de login
+    login_manager.login_view = 'auth.login'  
     login_manager.login_message = 'Por favor, faça login para acessar esta página.'
     
     # Função para carregar usuário 
