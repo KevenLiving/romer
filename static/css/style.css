@@ -1,0 +1,121 @@
+/* static/css/style.css - Estilos personalizados */
+
+/* Estilos gerais */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Navbar personalizada */
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+/* Cards de estatísticas no dashboard */
+.card {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.375rem;
+}
+
+/* Melhorar aparência dos cards de tarefa */
+.card-body h6 {
+    margin-bottom: 0.5rem;
+}
+
+/* Badges de prioridade */
+.badge {
+    font-size: 0.75em;
+}
+
+/* Melhorar formulários */
+.form-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.form-control:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Alertas personalizados */
+.alert {
+    border-radius: 0.375rem;
+}
+
+/* Estilo para listas de tarefas */
+.list-group-item {
+    border-left: none;
+    border-right: none;
+}
+
+.list-group-item:first-child {
+    border-top: none;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}
+
+/* Responsividade para cards */
+@media (max-width: 768px) {
+    .card {
+        margin-bottom: 1rem;
+    }
+    
+    .navbar-nav {
+        text-align: center;
+    }
+}
+
+/* Estilo para cards de listas */
+.card-title {
+    color: #495057;
+    font-weight: 600;
+}
+
+/* Hover nos cards */
+.card:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+/* Estilo para badges de status */
+.badge.bg-success {
+    background-color: #28a745 !important;
+}
+
+.badge.bg-warning {
+    background-color: #ffc107 !important;
+    color: #212529 !important;
+}
+
+.badge.bg-danger {
+    background-color: #dc3545 !important;
+}
+
+.badge.bg-info {
+    background-color: #17a2b8 !important;
+}
+
+.badge.bg-secondary {
+    background-color: #6c757d !important;
+}
+
+/* Melhorar aparência dos botões */
+.btn {
+    border-radius: 0.375rem;
+    font-weight: 500;
+}
+
+/* Container principal */
+.container {
+    max-width: 1200px;
+}
+
+/* Estilo para textos pequenos */
+.text-muted {
+    color: #6c757d !important;
+}
