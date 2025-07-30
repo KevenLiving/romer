@@ -1,16 +1,15 @@
-# controllers/auth_controller.py - Controller para autenticação
+
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, login_required, current_user
 from models.database import db
 from models.usuario import Usuario
 from forms.auth_forms import LoginForm, RegistroForm
 
-# Criando blueprint para as rotas de autenticação
+
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
-    """Página e função de login"""
     # Se o usuário já está logado, redireciona para página principal
     if current_user.is_authenticated:
         return redirect(url_for('main.index'))

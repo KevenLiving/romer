@@ -1,16 +1,14 @@
-# controllers/main_controller.py - Controller principal da aplicação
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import login_required, current_user
 from models.database import db
 from models.outros_models import Lista, Tarefa
 
-# Criando blueprint para as rotas principais
+
 main_bp = Blueprint('main', __name__)
 
 @main_bp.route('/')
 @login_required
 def index():
-    """Página principal - Dashboard do usuário"""
     # Busca as listas e tarefas do usuário atual
     listas = Lista.query.filter_by(usuario_id=current_user.id).all()
     tarefas_recentes = Tarefa.query.filter_by(usuario_id=current_user.id).order_by(Tarefa.criada_em.desc()).limit(5).all()
@@ -27,6 +25,8 @@ def index():
                          tarefas_concluidas=tarefas_concluidas,
                          tarefas_pendentes=tarefas_pendentes)
 
+
+
 @main_bp.route('/listas')
 @login_required
 def listas():
@@ -34,10 +34,10 @@ def listas():
     listas_usuario = Lista.query.filter_by(usuario_id=current_user.id).all()
     return render_template('main/listas.html', listas=listas_usuario)
 
+
 @main_bp.route('/nova-lista', methods=['POST'])
 @login_required
 def nova_lista():
-    """Cria uma nova lista"""
     nome_lista = request.form.get('nome')
     
     if nome_lista:
@@ -54,10 +54,12 @@ def nova_lista():
     
     return redirect(url_for('main.listas'))
 
+
+
+
 @main_bp.route('/tarefa/<int:tarefa_id>/editar', methods=['GET', 'POST'])
 @login_required
 def editar_tarefa(tarefa_id):
-    """Edita uma tarefa existente"""
     from forms.task_forms import EditarTarefaForm
     from datetime import datetime
     
@@ -100,7 +102,6 @@ def editar_tarefa(tarefa_id):
 @main_bp.route('/lista/<int:lista_id>/editar', methods=['GET', 'POST'])
 @login_required
 def editar_lista(lista_id):
-    """Edita o nome de uma lista"""
     lista = Lista.query.filter_by(id=lista_id, usuario_id=current_user.id).first()
     
     if not lista:
@@ -125,7 +126,6 @@ def editar_lista(lista_id):
 @main_bp.route('/tarefas')
 @login_required
 def tarefas():
-    """Página para gerenciar tarefas"""
     tarefas_usuario = Tarefa.query.filter_by(usuario_id=current_user.id).all()
     listas_usuario = Lista.query.filter_by(usuario_id=current_user.id).all()
     return render_template('main/tarefas.html', tarefas=tarefas_usuario, listas=listas_usuario)
@@ -133,7 +133,6 @@ def tarefas():
 @main_bp.route('/nova-tarefa', methods=['POST'])
 @login_required
 def nova_tarefa():
-    """Cria uma nova tarefa"""
     from flask import request
     from datetime import datetime
 
@@ -178,7 +177,6 @@ def nova_tarefa():
 @main_bp.route('/tarefa/<int:tarefa_id>/concluir', methods=['POST'])
 @login_required
 def concluir_tarefa(tarefa_id):
-    """Marca uma tarefa como concluída ou não concluída"""
     tarefa = Tarefa.query.filter_by(id=tarefa_id, usuario_id=current_user.id).first()
     
     if tarefa:
@@ -200,7 +198,6 @@ def concluir_tarefa(tarefa_id):
 @main_bp.route('/tarefa/<int:tarefa_id>/excluir', methods=['POST'])
 @login_required
 def excluir_tarefa(tarefa_id):
-    """Exclui uma tarefa"""
     tarefa = Tarefa.query.filter_by(id=tarefa_id, usuario_id=current_user.id).first()
     
     if tarefa:
@@ -221,7 +218,6 @@ def excluir_tarefa(tarefa_id):
 @main_bp.route('/lista/<int:lista_id>/excluir', methods=['POST'])
 @login_required
 def excluir_lista(lista_id):
-    """Exclui uma lista e todas suas tarefas"""
     lista = Lista.query.filter_by(id=lista_id, usuario_id=current_user.id).first()
     
     if lista:

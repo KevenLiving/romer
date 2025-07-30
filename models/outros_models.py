@@ -1,4 +1,3 @@
-# models/outros_models.py - Outros models da aplicação
 from datetime import datetime
 from models.database import db, tarefa_etiqueta
 
@@ -9,7 +8,7 @@ class Lista(db.Model):
     nome = db.Column(db.String(120), nullable=False)
     usuario_id = db.Column(db.Integer, db.ForeignKey('usuario.id'), nullable=False)
     
-    # Relacionamento com tarefas
+    # Colocando um relacionamento com as tarefas
     tarefas = db.relationship('Tarefa', backref='lista', lazy=True)
     
     def __repr__(self):
@@ -27,6 +26,8 @@ class Etiqueta(db.Model):
     def __repr__(self):
         return f'<Etiqueta {self.nome}>'
 
+
+
 class Tarefa(db.Model):
     __tablename__ = 'tarefa'
     
@@ -43,12 +44,15 @@ class Tarefa(db.Model):
     lista_id = db.Column(db.Integer, db.ForeignKey('lista.id'), nullable=False)
     usuario_id = db.Column(db.Integer, db.ForeignKey('usuario.id'), nullable=False)
     
-    # Relacionamentos
+    # Relacionamentos 
     etiquetas = db.relationship('Etiqueta', secondary=tarefa_etiqueta, back_populates='tarefas')
     comentarios = db.relationship('Comentario', backref='tarefa', lazy=True)
     
     def __repr__(self):
         return f'<Tarefa {self.titulo}>'
+
+
+
 
 class Comentario(db.Model):
     __tablename__ = 'comentario'
@@ -57,7 +61,6 @@ class Comentario(db.Model):
     conteudo = db.Column(db.Text, nullable=False)
     criado_em = db.Column(db.DateTime, default=datetime.utcnow)
     
-    # Chaves estrangeiras
     usuario_id = db.Column(db.Integer, db.ForeignKey('usuario.id'), nullable=False)
     tarefa_id = db.Column(db.Integer, db.ForeignKey('tarefa.id'), nullable=False)
     
